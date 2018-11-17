@@ -1,28 +1,34 @@
 package com.project.ordermanager;
 
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.ContextStartedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Date;
-/*
+
 import org.apache.http.*;
 import org.apache.http.client.methods.*;
-import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.client.HttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.springframework.stereotype.Component;
 
+@Component
+public class OrderManager {
 
-public class Test {
-    public static void test () throws IOException {
+    @EventListener(ContextRefreshedEvent.class)
+    public void tt(){
+        System.out.println("test");
+    }
+    public void test () throws IOException {
 
-        HttpClient httpClient = HttpClientBuilder.create().build();
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
         try {
 
@@ -50,7 +56,7 @@ public class Test {
 
                     Object obj = JSONValue.parse(line);
                     JSONObject tick = (JSONObject) obj;
-
+                 //   JSONObject t = (JSONObject)tick.get("");
                     // unwrap if necessary
                     if (tick.containsKey("tick")) {
                         tick = (JSONObject) tick.get("tick");
@@ -75,7 +81,7 @@ public class Test {
 
                         System.out.println(instrument);
                         System.out.println(time);
-                      //  System.out.println(tick);
+                        //  System.out.println(tick);
                     }
                 }
             } else {
@@ -85,8 +91,7 @@ public class Test {
             }
 
         } finally {
-            httpClient.getConnectionManager().shutdown();
+            httpClient.close();
         }
     }
 }
-*/
