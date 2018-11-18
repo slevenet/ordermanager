@@ -5,6 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "orderext")
 public class Orderext {
+
+    @Id
     private long orderext_id;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -3,9 +3,13 @@ package com.project.ordermanager.repositories;
 import com.project.ordermanager.entity.OrderEntity;
 import com.project.ordermanager.model.Order;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -37,8 +41,10 @@ public class OrderRepository  implements OperationDB{
 
     @Override
     public List<OrderEntity> selectAll() {
-     //   sessionFactory.getCurrentSession().getNamedQuery()
-        return null;
+        CriteriaQuery<OrderEntity> query = sessionFactory.getCurrentSession().getCriteriaBuilder().createQuery(OrderEntity.class);
+        Root<OrderEntity> root = query.from(OrderEntity.class);
+        query.select(root);
+        return sessionFactory.getCurrentSession().createQuery(query).getResultList();
     }
 
     @Override

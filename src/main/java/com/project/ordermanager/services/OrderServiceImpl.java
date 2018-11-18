@@ -5,6 +5,8 @@ import com.project.ordermanager.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderServiceImpl implements OrderServise {
 
@@ -12,8 +14,8 @@ public class OrderServiceImpl implements OrderServise {
     OrderRepository orderRepository;
 
     @Override
-    public Order get() {
-        return null;
+    public List getOrders() {
+        return orderRepository.selectAll();
     }
 
     @Override
