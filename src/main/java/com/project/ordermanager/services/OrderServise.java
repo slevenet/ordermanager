@@ -7,6 +7,7 @@ import java.util.List;
 public interface OrderServise {
 
     List getOrders();
+    List getOrdersByStatus(String value);
     Order save(Order user);
 
 }

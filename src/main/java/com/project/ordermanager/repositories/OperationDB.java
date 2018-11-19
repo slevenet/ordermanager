@@ -10,5 +10,6 @@ public interface OperationDB {
      <T> void update(T entity);
      <T> void  delete(T entity);
      List selectAll();
+     List select(String field, String value);
      <T> T select(long id);
 }

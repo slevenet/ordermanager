@@ -9,6 +9,7 @@ import javax.persistence.*;
 public class OrderEntity {
 
     @Id
+    @GeneratedValue
     private long order_id;
     private long strategy_id;
     private long order_type_id;

@@ -20,10 +20,6 @@ public class OrderRepository  implements OperationDB{
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void save(){
-       // sessionFactory.getCurrentSession().save();
-    }
-
     @Override
     public <T> void insert(T entity) {
         sessionFactory.getCurrentSession().save(entity);
@@ -50,5 +46,14 @@ public class OrderRepository  implements OperationDB{
     @Override
     public OrderEntity select(long id) {
         return sessionFactory.getCurrentSession().get(OrderEntity.class,id);
+    }
+
+    @Override
+    public List<OrderEntity> select(String field, String value){
+        CriteriaBuilder builder = sessionFactory.getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<OrderEntity> query = builder.createQuery(OrderEntity.class);
+        Root<OrderEntity> root = query.from(OrderEntity.class);
+        query.select(root).where(builder.equal(root.get(field), value));
+        return sessionFactory.getCurrentSession().createQuery(query).getResultList();
     }
 }
