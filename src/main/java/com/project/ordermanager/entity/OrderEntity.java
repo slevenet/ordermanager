@@ -11,9 +11,9 @@ public class OrderEntity {
     @Id
     @GeneratedValue
     private long order_id;
-    private long strategy_id;
-    private long order_type_id;
-    private long status_id;
+    private StrategyEntity strategy;
+    private OrderTypeEntity order_type;
+    private StatusEntity status;
     private double tp;
     private double sl;
     private String instrument;
@@ -22,11 +22,10 @@ public class OrderEntity {
     public OrderEntity() {
     }
 
-    public OrderEntity(long order_id, long strategy_id, long order_type_id, long status_id, double tp, double sl, String instrument) {
-        this.order_id = order_id;
-        this.strategy_id = strategy_id;
-        this.order_type_id = order_type_id;
-        this.status_id = status_id;
+    public OrderEntity(StrategyEntity strategy, OrderTypeEntity order_type, StatusEntity status, double tp, double sl, String instrument) {
+        this.strategy = strategy;
+        this.order_type = order_type;
+        this.status = status;
         this.tp = tp;
         this.sl = sl;
         this.instrument = instrument;
@@ -36,16 +35,16 @@ public class OrderEntity {
         this.order_id = order_id;
     }
 
-    public void setStrategy_id(long strategy_id) {
-        this.strategy_id = strategy_id;
+    public void setStrategy(StrategyEntity strategy) {
+        this.strategy = strategy;
     }
 
-    public void setOrder_type_id(long order_type_id) {
-        this.order_type_id = order_type_id;
+    public void setOrder_type(OrderTypeEntity order_type) {
+        this.order_type = order_type;
     }
 
-    public void setStatus_id(long status_id) {
-        this.status_id = status_id;
+    public void setStatus(StatusEntity status) {
+        this.status = status;
     }
 
     public void setTp(double tp) {
@@ -64,16 +63,16 @@ public class OrderEntity {
         return order_id;
     }
 
-    public long getStrategy_id() {
-        return strategy_id;
+    public StrategyEntity getStrategy() {
+        return strategy;
     }
 
-    public long getOrder_type_id() {
-        return order_type_id;
+    public OrderTypeEntity getOrder_type() {
+        return order_type;
     }
 
-    public long getStatus_id() {
-        return status_id;
+    public StatusEntity getStatus() {
+        return status;
     }
 
     public double getTp() {

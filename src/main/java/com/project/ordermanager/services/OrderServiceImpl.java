@@ -31,7 +31,11 @@ public class OrderServiceImpl implements OrderServise {
     }
 
     public void newOrder(Order order){
-        //orderRepository.insert(orderEntity);
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setInstrument(order.getInstrument());
+        orderEntity.setSl(order.getSl());
+        orderEntity.setTp(order.getTp());
+        orderRepository.insert(orderEntity);
     }
 
     public List getClosedOrders(){
