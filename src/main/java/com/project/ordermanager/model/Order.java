@@ -1,60 +1,93 @@
 package com.project.ordermanager.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 public class Order {
-    private Price openPrice;
-    private Price tp;
-    private Price sl;
-    private long lifetime;
-    private String type;
+
+    private String strategy;
+    private String order_type;
+    private double sl;
+    private double tp;
+    private double price;
+    private String instrument;
 
     public Order() {
     }
 
-    public Order(Price openPrice, Price tp, Price sl, long lifetime, String type) {
-        this.openPrice = openPrice;
-        this.tp = tp;
+    public Order(String strategy, String order_type, double sl, double tp, double price, String instrument) {
+        this.strategy = strategy;
+        this.order_type = order_type;
         this.sl = sl;
-        this.lifetime = lifetime;
-        this.type = type;
+        this.tp = tp;
+        this.price = price;
+        this.instrument = instrument;
     }
 
-    public Price getOpenPrice() {
-        return openPrice;
+    public void setStrategy(String strategy) {
+        this.strategy = strategy;
     }
 
-    public Price getTp() {
-        return tp;
+    public void setOrder_type(String order_type) {
+        this.order_type = order_type;
     }
 
-    public Price getSl() {
+    public void setSl(double sl) {
+        this.sl = sl;
+    }
+
+    public void setTp(double tp) {
+        this.tp = tp;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setInstrument(String instrument) {
+        this.instrument = instrument;
+    }
+
+    public String getStrategy() {
+        return strategy;
+    }
+
+    public String getOrder_type() {
+        return order_type;
+    }
+
+    public double getSl() {
         return sl;
     }
 
-    public long getLifetime() {
-        return lifetime;
+    public double getTp() {
+        return tp;
     }
 
-    public String getType() {
-        return type;
+    public double getPrice() {
+        return price;
     }
 
-    public void setOpenPrice(Price openPrice) {
-        this.openPrice = openPrice;
+    public String getInstrument() {
+        return instrument;
     }
 
-    public void setTp(Price tp) {
-        this.tp = tp;
+    @Override
+    public String toString() {
+        return "Order{" +
+                "strategy='" + strategy + '\'' +
+                ", order_type='" + order_type + '\'' +
+                ", sl=" + sl +
+                ", tp=" + tp +
+                ", price=" + price +
+                ", instrument='" + instrument + '\'' +
+                '}';
     }
 
-    public void setSl(Price sl) {
-        this.sl = sl;
-    }
-
-    public void setLifetime(long lifetime) {
-        this.lifetime = lifetime;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public  void format(Order order, int scale){
+        order.setSl(new BigDecimal(order.getSl()).setScale(scale, RoundingMode.UP).doubleValue());
+        order.setTp(new BigDecimal(order.getTp()).setScale(scale, RoundingMode.UP).doubleValue());
+        order.setPrice(new BigDecimal(order.getPrice()).setScale(scale, RoundingMode.UP).doubleValue());
     }
 }

@@ -6,6 +6,7 @@ import com.project.ordermanager.services.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 
@@ -17,7 +18,9 @@ public class OrderControllerRest {
     private OrderServiceImpl orderService;
 
     @PostMapping
-    public void post(@RequestBody OrderEntity order) {
+    public void post(@RequestBody Order order) {
+        priceFormetter(order);
+        System.out.println(order.toString());
          orderService.newOrder(order);
     }
 
@@ -35,5 +38,16 @@ public class OrderControllerRest {
     public List<OrderEntity> gettt() {
         orderService.updateStatus((OrderEntity) orderService.getNotOpenOrders().get(0));
         return orderService.getProcessedOrders();
+    }
+
+    private void priceFormetter(Order order){
+        String instrument = order.getInstrument();
+        if(instrument.equals("EUR_JPY") || instrument.equals("GBP_JPY")
+                || instrument.equals("USD_JPY") || instrument.equals("XAU_USD")) {
+
+            order.format(order, 2);
+        }
+        else
+            order.format(order,4);
     }
 }

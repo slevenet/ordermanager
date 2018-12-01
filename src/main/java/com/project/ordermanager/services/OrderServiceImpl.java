@@ -30,8 +30,8 @@ public class OrderServiceImpl implements OrderServise {
         return orderRepository.select(Constants.Status.FIELD_STATUS_ID, value);
     }
 
-    public void newOrder(OrderEntity orderEntity){
-        orderRepository.insert(orderEntity);
+    public void newOrder(Order order){
+        //orderRepository.insert(orderEntity);
     }
 
     public List getClosedOrders(){
